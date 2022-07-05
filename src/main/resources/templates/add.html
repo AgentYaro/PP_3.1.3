@@ -2,8 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/sakura.css}" type="text/css">
     <title>CRUD App</title>
 </head>
 <body>
+<form action="/add" th:object="${user}" th:method="PUT">
+    <label for="id">Id</label>
+    <input type="text" id="id" disabled name="id" value="Auto-assigned">
+    <label for="lastName">Last Name</label>
+    <input th:field="*{lastName}" type="text" required name="lastName" id="lastName" placeholder="Last Name">
+    <label for="firstName">First Name</label>
+    <input th:field="*{firstName}" type="text" required name="firstName" id="firstName" placeholder="First Name">
+    <label for="age">Age</label>
+    <input th:field="*{age}" type="number" required name="age" id="age" placeholder="Age" min=0>
+    <label for="email">Email</label>
+    <input th:field="*{email}" type="email" required name="email" id="email" placeholder="Email">
+    <label for="password">Password</label>
+    <input th:field="*{password}" type="password" required name="password" id="password" placeholder="Password">
+    <label>Roles:
+        <select multiple th:field="*{roles}" >
+            <option th:each="role:${listRoles}" th:text="${role.name}" th:value="${role.name}">
+        </select>
+    </label>
+    <input type="submit" value="Add User">
+</form>
 </body>
 </html>

@@ -3,16 +3,31 @@ package ru.yaro.crudapp.service;
 import ru.yaro.crudapp.models.Role;
 import ru.yaro.crudapp.models.User;
 
-public interface Service {
-    Object getById(Long id);
+import java.util.List;
+import java.util.Set;
 
-    Object getAllUsers();
+public interface AppService {
+    User getUserById(Long id);
 
-    Object getAllRoles();
+    List<User> getAllUsers();
 
-    void addRole(Role admin);
+    Set<Role> getAllRoles();
 
-    Role getRoleByName(String admin);
+    void addRole(Role role);
 
-    void addUser(User yaro);
+    Role getRoleByName(String name);
+
+    void addUser(User user);
+
+    void addAllRoles(Set<Role> roles);
+
+    void setExistingRoles(User user);
+
+    void fillRoles(String... roleNames);
+
+    void deleteUser(User user);
+
+    void updateUser(User user);
+
+    void deleteUserById(long id);
 }

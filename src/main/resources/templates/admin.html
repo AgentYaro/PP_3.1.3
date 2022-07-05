@@ -2,8 +2,53 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/sakura.css}" type="text/css">
     <title>CRUD App</title>
 </head>
 <body>
+<div th:if="${users.isEmpty()}">
+    <h1>Table is empty!</h1>
+</div>
+<div th:if="${not users.isEmpty()}">
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:utext="${user.getId()}">id</td>
+            <td th:utext="${user.getFirstName()}">first name</td>
+            <td th:utext="${user.getLastName()}">last name</td>
+            <td th:utext="${user.getAge()}">age</td>
+            <td th:utext="${user.getEmail()}">email</td>
+            <td>
+                <table>
+                    <tr >
+                        <td th:each="role:${user.getRoles()}" th:utext="${role.getName()}">role</td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <form th:method="POST" th:action="@{/edit(id=${user.getId()})}">
+                    <input type="submit" value="Edit"/>
+                </form>
+            </td>
+            <td>
+                <form th:method="POST" th:action="@{/delete(id=${user.getId()})}">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<form th:method="GET" action="/add">
+    <input type="submit" value="Add"/>
+</form>
 </body>
 </html>

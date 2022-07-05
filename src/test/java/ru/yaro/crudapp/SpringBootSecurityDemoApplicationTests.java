@@ -1,2 +1,13 @@
-package ru.yaro.crudapp;public class й {
+package ru.yaro.crudapp;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class SpringBootSecurityDemoApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
 }
