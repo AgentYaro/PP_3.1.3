@@ -10,10 +10,12 @@ import ru.yaro.crudapp.service.AppService;
 @Controller
 public class MainController {
     private AppService appService;
-
+    
+    public MainController(){}
+    
     @Autowired
-    public void setService(AppService appService) {
-        this.appService = appService;
+    public MainController(AppService appService){
+    this.appService = appService;
     }
 
     @GetMapping("/")
