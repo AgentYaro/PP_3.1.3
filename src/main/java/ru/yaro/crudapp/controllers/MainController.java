@@ -23,7 +23,7 @@ public class MainController {
         return "home";
     }
 
-    @GetMapping("/fill")
+    @GetMapping("/admin/fill")
     public String fill() {
         appService.fillRoles("ADMIN","USER");
         return "redirect:/";
@@ -40,40 +40,40 @@ public class MainController {
         return "admin";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/admin/add")
     public String add(Model model) {
         model.addAttribute("listRoles", appService.getAllRoles());
         model.addAttribute("user", new User());
         return "add";
     }
 
-    @PutMapping ("/add")
+    @PutMapping ("/admin/add")
     public String addExecute(@ModelAttribute("user") User user) {
         appService.setExistingRoles(user);
         appService.addUser(user);
         return "redirect:/admin";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/admin/edit")
     public String edit(Model model, @RequestParam(name = "id") Long id) {
         model.addAttribute("listRoles", appService.getAllRoles());
         model.addAttribute("user", appService.getUserById(id));
         return "edit";
     }
 
-    @PostMapping("/delete")
+    @PostMapping("/admin/delete")
     public String delete(Model model, @RequestParam(name = "id") Long id) {
         model.addAttribute("listRoles", appService.getAllRoles());
         model.addAttribute("user", appService.getUserById(id));
         return "delete";
     }
-    @PatchMapping("/edit")
+    @PatchMapping("/admin/edit")
     public String editExecute(@ModelAttribute("user") User user) {
         appService.setExistingRoles(user);
         appService.updateUser(user);
         return "redirect:/admin";
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping("/admin/delete")
     public String deleteExecute(@RequestParam("id") long id) {
         appService.deleteUserById(id);
         return "redirect:/admin";

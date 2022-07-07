@@ -6,7 +6,8 @@
     <title>CRUD App</title>
 </head>
 <body>
-<form th:action="@{/edit(id=${user.getId()})}" th:object="${user}" th:method="PATCH">
+<header th:insert="~{/blocks/header::header}"></header>
+<form th:action="@{/admin/edit(id=${user.getId()})}" th:object="${user}" th:method="PATCH">
     <label for="id">Id</label>
     <input type="text" id="id" disabled name="id" th:value="*{id}">
     <label for="lastName">Last Name</label>

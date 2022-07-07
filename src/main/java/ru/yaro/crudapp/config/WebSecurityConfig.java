@@ -36,11 +36,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                /*.antMatchers("/add","/fill").permitAll()
-                .antMatchers("/user").hasAuthority("ROLE_USER")
-                .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
-                .anyRequest().authenticated()*/
-                .anyRequest().permitAll()//Временно закомментил для ввода данных в бд и теста логина
+                .antMatchers("/user").hasAuthority("USER")
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin().successHandler(successUserHandler)
                 .permitAll()

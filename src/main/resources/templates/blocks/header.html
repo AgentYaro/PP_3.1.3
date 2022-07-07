@@ -6,9 +6,10 @@
     <title>CRUD App</title>
 </head>
 <body>
-<h1>Here will be sign in page when I will implement Spring Security</h1>
-<h2><a href="/user">USER</a></h2><br>
-<h2><a href="/admin">ADMIN</a></h2>
-<h2><a href="/admin/fill">Fill Table(only for first DB initialisation)</a></h2>
+<div th:fragment="header">
+    <div class="col-md-3 text-end">
+      <a href="/logout" class="nav-link px-2 link-dark">Log out</a>
+    </div>
+</div>
 </body>
 </html>

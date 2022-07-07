@@ -1,14 +1,16 @@
 package ru.yaro.crudapp.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
 public class UserPasswordEncoder {
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
+@Bean
     public PasswordEncoder getPasswordEncoder() {
-        return passwordEncoder;
+        return new BCryptPasswordEncoder(12);
     }
 }

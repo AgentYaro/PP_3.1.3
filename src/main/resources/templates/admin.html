@@ -6,6 +6,7 @@
     <title>CRUD App</title>
 </head>
 <body>
+<header th:insert="~{/blocks/header::header}"></header>
 <div th:if="${users.isEmpty()}">
     <h1>Table is empty!</h1>
 </div>
@@ -35,19 +36,19 @@
                 </table>
             </td>
             <td>
-                <form th:method="POST" th:action="@{/edit(id=${user.getId()})}">
+                <form th:method="POST" th:action="@{/admin/edit(id=${user.getId()})}">
                     <input type="submit" value="Edit"/>
                 </form>
             </td>
             <td>
-                <form th:method="POST" th:action="@{/delete(id=${user.getId()})}">
+                <form th:method="POST" th:action="@{/admin/delete(id=${user.getId()})}">
                     <input type="submit" value="Delete"/>
                 </form>
             </td>
         </tr>
     </table>
 </div>
-<form th:method="GET" action="/add">
+<form th:method="GET" action="/admin/add">
     <input type="submit" value="Add"/>
 </form>
 </body>

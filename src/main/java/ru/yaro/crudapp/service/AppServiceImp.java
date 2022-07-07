@@ -94,6 +94,7 @@ public class AppServiceImp implements AppService, UserDetailsService {
 
     @Override
     public void updateUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.update(user);
     }
 
@@ -104,15 +105,6 @@ public class AppServiceImp implements AppService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user =userDao.getByEmail(username);
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(), user.getPassword().toLowerCase(), user.isEnabled(), user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked(), getAuthorities(user.getRoles()));
-    }
-    private static List<GrantedAuthority> getAuthorities (Set<Role> roles) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
+        return userDao.getByEmail(username);
     }
 }

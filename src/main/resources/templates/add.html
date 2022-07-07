@@ -6,7 +6,8 @@
     <title>CRUD App</title>
 </head>
 <body>
-<form action="/add" th:object="${user}" th:method="PUT">
+<header th:insert="~{/blocks/header::header}"></header>
+<form action="/admin/add" th:object="${user}" th:method="PUT">
     <label for="id">Id</label>
     <input type="text" id="id" disabled name="id" value="Auto-assigned">
     <label for="lastName">Last Name</label>
