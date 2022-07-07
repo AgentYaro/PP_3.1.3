@@ -5,17 +5,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.yaro.crudapp.models.User;
-import ru.yaro.crudapp.service.AppService;
+import ru.yaro.crudapp.service.RoleService;
+import ru.yaro.crudapp.service.UserService;
+
+import java.security.Principal;
 
 @Controller
 public class MainController {
-    private AppService appService;
+    private UserService userService;
+    private RoleService roleService;
     
     public MainController(){}
     
     @Autowired
-    public MainController(AppService appService){
-    this.appService = appService;
+    public MainController(UserService userService, RoleService roleService){
+    this.userService = userService;
+    this.roleService=roleService;
     }
 
     @GetMapping("/")
@@ -25,57 +30,58 @@ public class MainController {
 
     @GetMapping("/admin/fill")
     public String fill() {
-        appService.fillRoles("ADMIN","USER");
+        roleService.fillRoles("ADMIN","USER");
         return "redirect:/";
     }
 
     @GetMapping("/user")
-    public String user() {
+    public String user(Model model,Principal principal) {
+        model.addAttribute("user", userService.getByEmail(principal.getName()));
         return "user";
     }
 
     @GetMapping("/admin")
     public String admin(Model model) {
-        model.addAttribute("users", appService.getAllUsers());
+        model.addAttribute("users", userService.getAllUsers());
         return "admin";
     }
 
     @GetMapping("/admin/add")
     public String add(Model model) {
-        model.addAttribute("listRoles", appService.getAllRoles());
+        model.addAttribute("listRoles", roleService.getAllRoles());
         model.addAttribute("user", new User());
         return "add";
     }
 
     @PutMapping ("/admin/add")
     public String addExecute(@ModelAttribute("user") User user) {
-        appService.setExistingRoles(user);
-        appService.addUser(user);
+        roleService.setExistingRoles(user);
+        userService.addUser(user);
         return "redirect:/admin";
     }
 
     @PostMapping("/admin/edit")
     public String edit(Model model, @RequestParam(name = "id") Long id) {
-        model.addAttribute("listRoles", appService.getAllRoles());
-        model.addAttribute("user", appService.getUserById(id));
+        model.addAttribute("listRoles", roleService.getAllRoles());
+        model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
 
     @PostMapping("/admin/delete")
     public String delete(Model model, @RequestParam(name = "id") Long id) {
-        model.addAttribute("listRoles", appService.getAllRoles());
-        model.addAttribute("user", appService.getUserById(id));
+        model.addAttribute("listRoles", roleService.getAllRoles());
+        model.addAttribute("user", userService.getUserById(id));
         return "delete";
     }
     @PatchMapping("/admin/edit")
     public String editExecute(@ModelAttribute("user") User user) {
-        appService.setExistingRoles(user);
-        appService.updateUser(user);
+        roleService.setExistingRoles(user);
+        userService.updateUser(user);
         return "redirect:/admin";
     }
     @DeleteMapping("/admin/delete")
     public String deleteExecute(@RequestParam("id") long id) {
-        appService.deleteUserById(id);
+        userService.deleteUserById(id);
         return "redirect:/admin";
     }
 

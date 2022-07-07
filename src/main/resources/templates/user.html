@@ -7,7 +7,29 @@
 </head>
 <body>
 <header th:insert="~{/blocks/header::header}"></header>
-<h1>Here will be your info when I implement Spring Security</h1>
-<h2><a href="/">Back</a></h2>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Surname</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Role</th>
+    </tr>
+    <tr>
+        <td th:utext="${user.getId()}">id</td>
+        <td th:utext="${user.getFirstName()}">first name</td>
+        <td th:utext="${user.getLastName()}">last name</td>
+        <td th:utext="${user.getAge()}">age</td>
+        <td th:utext="${user.getEmail()}">email</td>
+        <td>
+            <table>
+                <tr >
+                    <td th:each="role:${user.getRoles()}" th:utext="${role.getName()}">role</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
