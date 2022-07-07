@@ -30,7 +30,7 @@
             <td th:utext="${user.getEmail()}">email</td>
             <td>
                 <table>
-                    <tr >
+                    <tr>
                         <td th:each="role:${user.getRoles()}" th:utext="${role.getName()}">role</td>
                     </tr>
                 </table>
@@ -51,5 +51,6 @@
 <form th:method="GET" action="/admin/add">
     <input type="submit" value="Add"/>
 </form>
+<a href="/admin/fill">Fill Table(only for first DB initialisation)</a>
 </body>
 </html>

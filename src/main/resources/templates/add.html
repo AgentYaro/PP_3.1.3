@@ -21,7 +21,7 @@
     <label for="password">Password</label>
     <input th:field="*{password}" type="password" required name="password" id="password" placeholder="Password">
     <label>Roles:
-        <select multiple th:field="*{roles}" >
+        <select multiple th:field="*{roles}">
             <option th:each="role:${listRoles}" th:text="${role.name}" th:value="${role.name}">
         </select>
     </label>

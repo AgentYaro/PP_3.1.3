@@ -52,8 +52,9 @@ public class UserDaoImp implements UserDao {
         entityManager.remove(getById(id));
     }
 
+    @Transactional
     @Override
     public User getByEmail(String email) {
-        return (User)entityManager.createQuery("select user from User user where user.email = ?1").setParameter(1,email).getSingleResult();
+        return (User) entityManager.createQuery("select user from User user where user.email = ?1").setParameter(1, email).getSingleResult();
     }
 }

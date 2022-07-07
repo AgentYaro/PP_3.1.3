@@ -14,13 +14,14 @@ import java.security.Principal;
 public class MainController {
     private UserService userService;
     private RoleService roleService;
-    
-    public MainController(){}
-    
+
+    public MainController() {
+    }
+
     @Autowired
-    public MainController(UserService userService, RoleService roleService){
-    this.userService = userService;
-    this.roleService=roleService;
+    public MainController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/")
@@ -30,12 +31,12 @@ public class MainController {
 
     @GetMapping("/admin/fill")
     public String fill() {
-        roleService.fillRoles("ADMIN","USER");
-        return "redirect:/";
+        roleService.fillRoles("ADMIN", "USER");
+        return "redirect:/admin";
     }
 
     @GetMapping("/user")
-    public String user(Model model,Principal principal) {
+    public String user(Model model, Principal principal) {
         model.addAttribute("user", userService.getByEmail(principal.getName()));
         return "user";
     }
@@ -53,7 +54,7 @@ public class MainController {
         return "add";
     }
 
-    @PutMapping ("/admin/add")
+    @PutMapping("/admin/add")
     public String addExecute(@ModelAttribute("user") User user) {
         roleService.setExistingRoles(user);
         userService.addUser(user);
@@ -73,12 +74,14 @@ public class MainController {
         model.addAttribute("user", userService.getUserById(id));
         return "delete";
     }
+
     @PatchMapping("/admin/edit")
     public String editExecute(@ModelAttribute("user") User user) {
         roleService.setExistingRoles(user);
         userService.updateUser(user);
         return "redirect:/admin";
     }
+
     @DeleteMapping("/admin/delete")
     public String deleteExecute(@RequestParam("id") long id) {
         userService.deleteUserById(id);

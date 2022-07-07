@@ -25,10 +25,7 @@ public class RoleDaoImp implements RoleDao {
     @Transactional
     @Override
     public void addRole(Role role) {
-       // try {
-            entityManager.merge(role);
-        //} catch (Exception ignore) {
-       // }
+        entityManager.merge(role);
     }
 
     @Transactional
@@ -37,10 +34,11 @@ public class RoleDaoImp implements RoleDao {
         TypedQuery<Role> query = entityManager.createQuery("select role from Role role", Role.class);
         return new HashSet<>(query.getResultList());
     }
-@Transactional
+
+    @Transactional
     @Override
     public void addAllRoles(Set<Role> roles) {
-        for (Role role:roles) {
+        for (Role role : roles) {
             addRole(role);
         }
     }

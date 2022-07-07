@@ -11,15 +11,19 @@
     <label for="id">Id</label>
     <input type="text" id="id" disabled name="id" th:value="*{id}">
     <label for="lastName">Last Name</label>
-    <input th:field="*{lastName}" disabled th:value="*{lastName}" type="text" required name="lastName" id="lastName" placeholder="Last Name">
+    <input th:field="*{lastName}" disabled th:value="*{lastName}" type="text" required name="lastName" id="lastName"
+           placeholder="Last Name">
     <label for="firstName">First Name</label>
-    <input th:field="*{firstName}" disabled th:value="*{firstName}" type="text" required name="firstName" id="firstName" placeholder="First Name">
+    <input th:field="*{firstName}" disabled th:value="*{firstName}" type="text" required name="firstName" id="firstName"
+           placeholder="First Name">
     <label for="age">Age</label>
-    <input th:field="*{age}" disabled th:value="*{age}" type="number" required name="age" id="age" placeholder="Age" min=0>
+    <input th:field="*{age}" disabled th:value="*{age}" type="number" required name="age" id="age" placeholder="Age"
+           min=0>
     <label for="email">Email</label>
-    <input th:field="*{email}" disabled th:value="*{email}" type="email" required name="email" id="email" placeholder="Email">
-   <label>Roles:
-        <select disabled multiple th:value="*{password}" th:field="*{roles}" >
+    <input th:field="*{email}" disabled th:value="*{email}" type="email" required name="email" id="email"
+           placeholder="Email">
+    <label>Roles:
+        <select disabled multiple th:value="*{password}" th:field="*{roles}">
             <option th:each="role:${listRoles}" th:text="${role.name}" th:value="${role.name}">
         </select>
     </label>

@@ -24,7 +24,7 @@
         <td th:utext="${user.getEmail()}">email</td>
         <td>
             <table>
-                <tr >
+                <tr>
                     <td th:each="role:${user.getRoles()}" th:utext="${role.getName()}">role</td>
                 </tr>
             </table>
