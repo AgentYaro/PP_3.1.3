@@ -8,6 +8,7 @@ import ru.yaro.crudapp.models.User;
 
 import java.util.HashSet;
 import java.util.Set;
+
 @Service
 public class RoleServiceImp implements RoleService {
     private RoleDao roleDao;
@@ -55,5 +56,14 @@ public class RoleServiceImp implements RoleService {
         for (String roleName : roleNames) {
             roleDao.addRole(new Role(roleName));
         }
+    }
+
+    @Override
+    public Set<String> getRoleNames(Set<Role> roles) {
+        Set<String> names = new HashSet<>();
+        for (Role role : roles) {
+            names.add(role.getName());
+        }
+        return names;
     }
 }

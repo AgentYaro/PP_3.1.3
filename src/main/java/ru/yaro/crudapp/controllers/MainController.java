@@ -24,35 +24,25 @@ public class MainController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/")
-    public String home() {
-        return "home";
-    }
-
-    @GetMapping("/admin/fill")
-    public String fill() {
-        roleService.fillRoles("ADMIN", "USER");
-        return "redirect:/admin";
-    }
-
     @GetMapping("/user")
     public String user(Model model, Principal principal) {
-        model.addAttribute("user", userService.getByEmail(principal.getName()));
+        User user = userService.getByEmail(principal.getName());
+        model.addAttribute("userRoles",roleService.getRoleNames(user.getRoles()));
+        model.addAttribute("user",user );
         return "user";
     }
 
     @GetMapping("/admin")
-    public String admin(Model model) {
+    public String admin(Model model, Principal principal) {
+        User user = userService.getByEmail(principal.getName());
+        model.addAttribute("userRoles",roleService.getRoleNames(user.getRoles()));
+        model.addAttribute("thisUser",user );
+        model.addAttribute("newUser", new User());
+        model.addAttribute("listRoles", roleService.getAllRoles());
         model.addAttribute("users", userService.getAllUsers());
         return "admin";
     }
 
-    @GetMapping("/admin/add")
-    public String add(Model model) {
-        model.addAttribute("listRoles", roleService.getAllRoles());
-        model.addAttribute("user", new User());
-        return "add";
-    }
 
     @PutMapping("/admin/add")
     public String addExecute(@ModelAttribute("user") User user) {
@@ -61,23 +51,11 @@ public class MainController {
         return "redirect:/admin";
     }
 
-    @PostMapping("/admin/edit")
-    public String edit(Model model, @RequestParam(name = "id") Long id) {
-        model.addAttribute("listRoles", roleService.getAllRoles());
-        model.addAttribute("user", userService.getUserById(id));
-        return "edit";
-    }
-
-    @PostMapping("/admin/delete")
-    public String delete(Model model, @RequestParam(name = "id") Long id) {
-        model.addAttribute("listRoles", roleService.getAllRoles());
-        model.addAttribute("user", userService.getUserById(id));
-        return "delete";
-    }
-
-    @PatchMapping("/admin/edit")
+    @PutMapping("/admin/edit")
     public String editExecute(@ModelAttribute("user") User user) {
+        System.out.println(user);
         roleService.setExistingRoles(user);
+        System.out.println(user);
         userService.updateUser(user);
         return "redirect:/admin";
     }
