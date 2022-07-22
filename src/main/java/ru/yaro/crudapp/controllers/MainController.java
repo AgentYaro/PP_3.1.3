@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.yaro.crudapp.models.Role;
 import ru.yaro.crudapp.models.User;
 import ru.yaro.crudapp.service.RoleService;
 import ru.yaro.crudapp.service.UserService;
 
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class MainController {
@@ -38,6 +41,7 @@ public class MainController {
         model.addAttribute("userRoles",roleService.getRoleNames(user.getRoles()));
         model.addAttribute("thisUser",user );
         model.addAttribute("newUser", new User());
+        model.addAttribute("editUser", new User());
         model.addAttribute("listRoles", roleService.getAllRoles());
         model.addAttribute("users", userService.getAllUsers());
         return "admin";
@@ -52,7 +56,9 @@ public class MainController {
     }
 
     @PatchMapping("/admin/edit")
-    public String editExecute(@ModelAttribute("user") User user) {
+    public String editExecute(@ModelAttribute("editUser") User editUser, @ModelAttribute("user") User user) {
+        user.setRoles(editUser.getRoles());
+        user.setPassword(editUser.getPassword());
         System.out.println(user);
         roleService.setExistingRoles(user);
         System.out.println(user);

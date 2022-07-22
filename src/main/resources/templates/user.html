@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>User Panel</title>
+    <title>User page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <p class="navbar-brand text-white">
-            <span class="align-middle" th:text="${user.email}"></span>
+            <b><span class="align-middle" th:text="${user.email}"></span></b>
             <span class="align-middle">with roles:</span>
             <span class="align-middle" th:each="titleRole:${user.roles}" th:text="${titleRole}+' '"></span>
         </p>
         <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-dark text-secondary">Logout</button>
+            <button type="submit" class="btn btn-dark text-secondary"><b>Logout</b></button>
         </form>
     </div>
 </nav>
@@ -34,11 +34,11 @@
 
         <div class="p-0 col-10 bg-light">
             <div class="tabs p-4">
-                <h1>User information page</h1>
+                <h1>User information-page</h1>
                 <div class="pt-2 tab-content">
                     <div class="tab-pane fade show active" id="description">
                         <div class="p-3 border">
-                            <h5 class="my-0 mx-2">User info</h5>
+                            <h5 class="my-0 mx-2">About user</h5>
                         </div>
                         <div class="p-3 bg-white border border-top-0">
                             <table class="usersTable table table-striped bg-white">
@@ -49,7 +49,7 @@
                                     <th>Last Name</th>
                                     <th>Age</th>
                                     <th>Email</th>
-                                    <th>Roles</th>
+                                    <th>Role</th>
                                 </tr>
                                 </thead>
                                 <tbody>
