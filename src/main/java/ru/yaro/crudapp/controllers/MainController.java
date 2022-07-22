@@ -51,7 +51,7 @@ public class MainController {
         return "redirect:/admin";
     }
 
-    @PutMapping("/admin/edit")
+    @PatchMapping("/admin/edit")
     public String editExecute(@ModelAttribute("user") User user) {
         System.out.println(user);
         roleService.setExistingRoles(user);

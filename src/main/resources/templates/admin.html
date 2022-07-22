@@ -111,7 +111,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <form th:action="@{/admin/edit(id=${user.getId()})}"
-                                                                  th:method="PUT"
+                                                                  th:method="PATCH"
                                                                   th:object="${user}"
                                                                   th:id="${'editForm'+user.id}">
                                                                 <br><label th:for="${'idEdit'+user.id}">Id</label>
